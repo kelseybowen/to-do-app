@@ -1,5 +1,5 @@
 from flask_app.config.dbconnection import connectToMySQL
-import datetime
+from datetime import date
 
 class Task:
     db = 'to_do_app'
@@ -56,7 +56,9 @@ class Task:
     
     @classmethod
     def create_task(cls, data):
-        query = "INSERT INTO tasks (title, start_date, due_date, notes, is_completed) VALUES (%(title)s, %(start_date)s, %(due_date)s, %(notes)s, 0);"
+        if data['start_date'] == '':
+            data['start_date'] = date.today()
+        query = "INSERT INTO tasks (title, start_date, due_date, notes, is_completed, list_id) VALUES (%(title)s, %(start_date)s, %(due_date)s, %(notes)s, 0, %(list_id)s);"
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod

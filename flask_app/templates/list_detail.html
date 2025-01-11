@@ -10,6 +10,10 @@
     <div>
         <div class="header container border">
             <h1>{{list.title}}</h1>
+            <div class="container border d-flex justify-content-between">
+                <a class="btn btn-warning" href="/{{list.owner_id}}/{{list.id}}/add_task">Add Task</a>
+                <a class="btn btn-danger" href="/{{list.owner_id}}">Back</a>
+            </div>
             <ul>
             {% for task in tasks %}
                 <li>{{task.title}}</li>
